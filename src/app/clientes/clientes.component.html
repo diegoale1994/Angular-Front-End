@@ -22,11 +22,11 @@ No se encuentran Registros en la base de datos
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td>{{cliente.id}}</td>
-            <td>{{cliente.nombre}}</td>
+          <td>{{cliente.id }}</td>
+            <td>{{cliente.nombre | uppercase}}</td>
               <td>{{cliente.apellido}}</td>
                 <td>{{cliente.email}}</td>
-                  <td>{{cliente.createAt}}</td>
+                  <td>{{cliente.createAt | date: 'longDate'}}</td>
                     <td>
                       <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary">Editar</button>
                     </td>
