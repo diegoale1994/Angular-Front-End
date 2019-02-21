@@ -1,17 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import {Cliente} from './cliente';
 import {ClienteService} from './cliente.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html'
 })
 export class ClientesComponent implements OnInit {
   clientes: Cliente[];
-  constructor(private clientesService: ClienteService) { }
+  paginador:any;
+  constructor(private clientesService: ClienteService, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
-    this.clientesService.getClientes().subscribe(clientes => this.clientes = clientes);
+    this.activatedRoute.paramMap.subscribe(params => {
+      let pagina:number = +params.get('page');
+      if(!pagina){
+        pagina=0;
+      }
+      this.clientesService.getClientesPaginado(pagina).subscribe(response => {
+        this.clientes = response.content as Cliente[];
+        this.paginador = response;
+      });
+    })
   }
 
   delete (cliente: Cliente): void{

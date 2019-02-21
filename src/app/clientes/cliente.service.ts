@@ -17,6 +17,14 @@ export class ClienteService {
     //return of (CLIENTES);
     return this.http.get<Cliente[]>(this.urlEndPoint);
   }
+  getClientesPaginado(pagina:number): Observable <any>{
+    //return of (CLIENTES);
+    return this.http.get(this.urlEndPoint+'/page/'+pagina).pipe(
+      map((response:any) => {
+        return response;
+      })
+    )
+  }
 
  create(cliente: Cliente): Observable<any>{
    return this.http.post<any>(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
