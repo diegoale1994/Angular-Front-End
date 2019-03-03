@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Cliente} from '../cliente';
 import { ClienteService } from '../cliente.service';
-import {ActivatedRoute} from '@angular/router';
+import {ModalService} from './modal.service';
 import Swal from 'sweetalert2';
 import {HttpEventType} from '@angular/common/http';
 @Component({
@@ -10,22 +10,15 @@ import {HttpEventType} from '@angular/common/http';
   styleUrls: ['./detalle.component.css']
 })
 export class DetalleComponent implements OnInit {
-  cliente:Cliente;
+  @Input() cliente:Cliente;
   titulo:string = "Detalle del cliente";
    progreso:number= 0;
   private fotoSeleccionada:File;
-  constructor(private clienteService: ClienteService, private activatedRoute:ActivatedRoute) { }
+  constructor(private clienteService: ClienteService,
+     private modalservice: ModalService) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe( params =>{
-      let id:number = +params.get("id");
-      if(id){
-        this.clienteService.getCliente(id).subscribe(cliente =>{
-          this.cliente = cliente;
 
-        })
-      }
-    })
   }
 
   seleccionaFoto(event){
@@ -49,6 +42,7 @@ Swal('Error',`No se ha seleccionado ninguna imagen`,'error');
   }else if (event.type === HttpEventType.Response){
     let response:any = event.body;
     this.cliente = response.cliente as Cliente;
+    this.modalservice.notificarUpload.emit(this.cliente);
     Swal('La foto se ha subido Correctamente',response.mensaje,'success');
   }
 
@@ -56,6 +50,10 @@ Swal('Error',`No se ha seleccionado ninguna imagen`,'error');
 }
 }
 
-
+cerrarModal(){
+  this.modalservice.cerrarModal();
+  this.fotoSeleccionada=null;
+  this.progreso=0;
+}
 
 }
