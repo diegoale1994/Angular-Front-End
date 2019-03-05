@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Cliente} from './cliente';
+import {Region} from './region';
 import { Observable, of, throwError } from 'rxjs';
 import {HttpClient, HttpHeaders, HttpRequest, HttpEvent} from '@angular/common/http';
 import {map , catchError} from 'rxjs/operators';
@@ -86,6 +87,10 @@ const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData,{
 });
 
     return this.http.request(req);
+  }
+
+  getRegiones():Observable<Region[]>{
+      return this.http.get<Region[]>(this.urlEndPoint+'/regiones');
   }
 
 }
