@@ -4,6 +4,7 @@ import { ClienteService } from '../cliente.service';
 import {ModalService} from './modal.service';
 import Swal from 'sweetalert2';
 import {HttpEventType} from '@angular/common/http';
+import {AuthService} from '../../usuarios/auth.service';
 @Component({
   selector: 'detalle-cliente',
   templateUrl: './detalle.component.html',
@@ -15,7 +16,7 @@ export class DetalleComponent implements OnInit {
    progreso:number= 0;
   private fotoSeleccionada:File;
   constructor(private clienteService: ClienteService,
-     private modalservice: ModalService) { }
+     private modalservice: ModalService, public auth: AuthService) { }
 
   ngOnInit() {
 
