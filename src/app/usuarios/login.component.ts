@@ -22,13 +22,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.usuario);
     if (this.usuario.username == null || this.usuario.password == null) {
       Swal('Error Login', 'usuario o contraseña vacia', 'error');
       return;
     }
     this.auth.login(this.usuario).subscribe(response => {
-      console.log(response);
       this.auth.guardarusuario(response.access_token);
       this.auth.guardarToken(response.access_token);
       let usuario = this.auth.usuario;
