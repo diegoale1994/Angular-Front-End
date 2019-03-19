@@ -12,7 +12,7 @@ No se encuentran Registros en la base de datos
     <table class="table table-bordered table-striped" *ngIf="clientes?.length>0">
       <thead>
         <tr>
-          <th *ngIf="auth.hasRole('ROLE_USER')">Imagen</th>
+          <th>Imagen</th> <!--//*ngIf="auth.hasRole('ROLE_USER')" -->
             <th>Nombre</th>
               <th>Apellido</th>
                 <th>Email</th>
@@ -23,7 +23,7 @@ No se encuentran Registros en la base de datos
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td *ngIf="auth.hasRole('ROLE_USER')">
+          <td > <!-- *ngIf="auth.hasRole('ROLE_USER')" -->
             <img (click) = "abrirModal(cliente)" *ngIf="cliente?.foto"
             src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
             <img (click) = "abrirModal(cliente)" *ngIf="!cliente?.foto"

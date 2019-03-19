@@ -31,7 +31,7 @@ export class AuthService {
     return null;
   }
   login(usuario:Usuario):Observable<any>{
-    const urlEndPoint = "http://localhost:8080/oauth/token";
+    const urlEndPoint = "http://localhost:8044/oauth/token";
     const credencialesApp = btoa("angularapp" + ":" + '12345');
     const httpHeaders = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded',
     'Authorization':'Basic '+ credencialesApp});
