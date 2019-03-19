@@ -3,6 +3,8 @@ import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
 import { ModalService } from './modal.service';
 import Swal from 'sweetalert2';
+import { Factura } from '../../facturas/models/factura';
+import { FacturaService } from '../../facturas/services/factura.service';
 import { HttpEventType } from '@angular/common/http';
 import { AuthService } from '../../usuarios/auth.service';
 @Component({
@@ -15,11 +17,39 @@ export class DetalleComponent implements OnInit {
   titulo: string = "Detalle del cliente";
   progreso: number = 0;
   private fotoSeleccionada: File;
-  constructor(private clienteService: ClienteService,
+  constructor(private facturaService:FacturaService, private clienteService: ClienteService,
     private modalservice: ModalService, public auth: AuthService) { }
 
   ngOnInit() {
 
+  }
+
+  eliminar(factura:Factura):void{
+    Swal({
+      title: 'Esta seguro?',
+      text: `Esta seguro que desea eliminar la factura?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.value) {
+
+        this.facturaService.delete(factura.id).subscribe(
+          response => {
+            this.cliente.facturas = this.cliente.facturas.filter(f => f !== factura)
+            Swal(
+              'Eliminado!',
+              'Factura eliminada',
+              'success'
+            )
+          }
+        )
+
+
+      }
+    })
   }
 
   seleccionaFoto(event) {
