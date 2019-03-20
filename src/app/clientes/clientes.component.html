@@ -17,6 +17,7 @@ No se encuentran Registros en la base de datos
               <th>Apellido</th>
                 <th>Email</th>
                   <th>Creado en</th>
+                    <th>Crear Factura</th>
                   <th *ngIf="auth.hasRole('ROLE_ADMIN')">Editar</th>
                   <th *ngIf="auth.hasRole('ROLE_ADMIN')">Eliminar</th>
         </tr>
@@ -33,8 +34,9 @@ No se encuentran Registros en la base de datos
               <td>{{cliente.apellido}}</td>
                 <td>{{cliente.email}}</td>
                   <td>{{cliente.createAt | date: 'longDate'}}</td>
+                    <td><button type="button" class="btn btn-success" [routerLink] = "['/facturas/form',cliente.id]">Crear</button></td>
                     <td *ngIf="auth.hasRole('ROLE_ADMIN')">
-                      <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-primary">Editar</button>
+                      <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-success">Editar</button>
                     </td>
                     <td *ngIf="auth.hasRole('ROLE_ADMIN')">
                       <button type="button" name="eliminar" (click)='delete(cliente)' class="btn btn-danger btn-sm">Eliminar</button>

@@ -15,7 +15,6 @@ export class DetalleFacturaComponent implements OnInit {
       let id = +params.get('id');
       this.facturaService.getFactura(id).subscribe((factura:Factura) => {
         this.factura = factura;
-        console.log(this.factura);
       })
     })
   }
