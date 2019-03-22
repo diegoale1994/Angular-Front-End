@@ -12,29 +12,29 @@ No se encuentran Registros en la base de datos
     <table class="table table-bordered table-striped" *ngIf="clientes?.length>0">
       <thead>
         <tr>
-          <th>Imagen</th> <!--//*ngIf="auth.hasRole('ROLE_USER')" -->
+          <th *ngIf="auth.hasRole('ROLE_USER')">Imagen</th> <!--// -->
             <th>Nombre</th>
               <th>Apellido</th>
                 <th>Email</th>
                   <th>Creado en</th>
-                    <th>Crear Factura</th>
+                    <th *ngIf="auth.hasRole('ROLE_ADMIN')">Crear Factura</th>
                   <th *ngIf="auth.hasRole('ROLE_ADMIN')">Editar</th>
                   <th *ngIf="auth.hasRole('ROLE_ADMIN')">Eliminar</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td > <!-- *ngIf="auth.hasRole('ROLE_USER')" -->
+          <td *ngIf="auth.hasRole('ROLE_USER')"> <!--  -->
             <img (click) = "abrirModal(cliente)" *ngIf="cliente?.foto"
             src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
             <img (click) = "abrirModal(cliente)" *ngIf="!cliente?.foto"
-            src="http://localhost:8080/img/nouser.png" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
+            src="http://localhost:8044/img/nouser.png" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
           </td>
             <td>{{cliente.nombre | uppercase}}</td>
               <td>{{cliente.apellido}}</td>
                 <td>{{cliente.email}}</td>
                   <td>{{cliente.createAt | date: 'longDate'}}</td>
-                    <td><button type="button" class="btn btn-success" [routerLink] = "['/facturas/form',cliente.id]">Crear</button></td>
+                    <td *ngIf="auth.hasRole('ROLE_ADMIN')"><button type="button" class="btn btn-success" [routerLink] = "['/facturas/form',cliente.id]">Crear</button></td>
                     <td *ngIf="auth.hasRole('ROLE_ADMIN')">
                       <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.id]" class="btn btn-success">Editar</button>
                     </td>

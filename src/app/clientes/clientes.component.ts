@@ -14,7 +14,7 @@ export class ClientesComponent implements OnInit {
   paginador: any;
   clienteSeleccionado: Cliente;
   constructor(private clientesService: ClienteService, private activatedRoute: ActivatedRoute,
-  private modalservice: ModalService, public auth: AuthService) { }
+  public modalservice: ModalService, public auth: AuthService) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {

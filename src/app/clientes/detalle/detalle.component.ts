@@ -18,7 +18,7 @@ export class DetalleComponent implements OnInit {
   progreso: number = 0;
   private fotoSeleccionada: File;
   constructor(private facturaService:FacturaService, private clienteService: ClienteService,
-    private modalservice: ModalService, public auth: AuthService) { }
+    public modalservice: ModalService, public auth: AuthService) { }
 
   ngOnInit() {
 

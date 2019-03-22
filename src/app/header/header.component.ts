@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 export class HeaderComponent {
   tittle = "APP Angular";
 
-  constructor(private auth: AuthService, private router : Router) { }
+  constructor(public auth: AuthService, private router : Router) { }
 
   logout(): void {
     Swal('Logout', `${this.auth.usuario.nombre} has cerrado session !`, 'success');

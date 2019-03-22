@@ -79,6 +79,7 @@ export class ClienteService {
   }
 
   update(cliente: Cliente): Observable<any> {
+  cliente.facturas = null;
     return this.http.put<any>(`${this.urlEndPoint}/${cliente.id}`, cliente).pipe(
       catchError(e => {
         if (e.status == 400) {
