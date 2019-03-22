@@ -9,7 +9,7 @@
 <div *ngIf="clientes?.length==0" class="alert alert-info">
 No se encuentran Registros en la base de datos
 </div>
-    <table class="table table-bordered table-striped" *ngIf="clientes?.length>0">
+    <table class="table table-bordered table-striped animated fadeIn fast" *ngIf="clientes?.length>0">
       <thead>
         <tr>
           <th *ngIf="auth.hasRole('ROLE_USER')">Imagen</th> <!--// -->
@@ -26,7 +26,7 @@ No se encuentran Registros en la base de datos
         <tr *ngFor="let cliente of clientes">
           <td *ngIf="auth.hasRole('ROLE_USER')"> <!--  -->
             <img (click) = "abrirModal(cliente)" *ngIf="cliente?.foto"
-            src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
+            src="http://localhost:8044/api/uploads/img/{{cliente.foto}}" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
             <img (click) = "abrirModal(cliente)" *ngIf="!cliente?.foto"
             src="http://localhost:8044/img/nouser.png" alt="" class="img-thumbnail rounded" style="width:64px; cursor:pointer;">
           </td>

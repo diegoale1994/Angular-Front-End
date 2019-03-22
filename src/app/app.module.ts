@@ -25,9 +25,10 @@ import {TokenInterceptor} from './usuarios/interceptors/token.interceptor';
 import {AuthInterceptor} from './usuarios/interceptors/auth.interceptor';
 import { DetalleFacturaComponent } from './facturas/detalle-factura.component';
 import { FacturasComponent } from './facturas/facturas.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 registerLocaleData(es);
 const routes: Routes = [
-  {path: '', redirectTo: 'clientes', pathMatch: 'full'},
+  {path: '', component: WelcomeComponent},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'login', component: LoginComponent},
   {path: 'clientes/form', component: FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
@@ -35,7 +36,8 @@ const routes: Routes = [
   {path: 'clientes/page/:page', component: ClientesComponent},
   {path: 'facturas/:id', component: DetalleFacturaComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_USER'}},
   {path: 'facturas/form/:clienteId', component: FacturasComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_USER'}},
-  {path: 'clientes/form/:id', component: FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}}
+  {path: 'clientes/form/:id', component: FormComponent, canActivate:[AuthGuard, RoleGuard], data:{role: 'ROLE_ADMIN'}},
+  { path: '**', pathMatch: 'full', redirectTo: ''}
 ];
 
 @NgModule({
@@ -50,7 +52,8 @@ const routes: Routes = [
     DetalleComponent,
     LoginComponent,
     DetalleFacturaComponent,
-    FacturasComponent
+    FacturasComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

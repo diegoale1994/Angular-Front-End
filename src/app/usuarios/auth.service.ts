@@ -15,8 +15,8 @@ export class AuthService {
   public get usuario(): Usuario{
   if (this._usuario != null) {
     return this._usuario;
-  } else if (this._usuario == null && sessionStorage.getItem('usuario') != null){
-    this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
+  } else if (this._usuario == null && localStorage.getItem('usuario') != null){
+    this._usuario = JSON.parse(localStorage.getItem('usuario')) as Usuario;
     return this._usuario;
   }
     return new Usuario();
@@ -24,8 +24,8 @@ export class AuthService {
   public get token():string{
     if (this._token != null) {
       return this._token;
-    } else if (this._token == null && sessionStorage.getItem('token') != null){
-      this._token = sessionStorage.getItem('token');
+    } else if (this._token == null && localStorage.getItem('token') != null){
+      this._token = localStorage.getItem('token');
       return this._token;
     }
     return null;
@@ -49,12 +49,12 @@ export class AuthService {
     this._usuario.email = this.obtenerDatosToken(token).email;
     this._usuario.username = this.obtenerDatosToken(token).user_name;
     this._usuario.roles = this.obtenerDatosToken(token).authorities;
-    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+    localStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
   guardarToken(token:string):void{
     this._token = token;
-    sessionStorage.setItem('token', token);
+    localStorage.setItem('token', token);
   }
 
   obtenerDatosToken(access_token:string):any{
@@ -75,7 +75,7 @@ export class AuthService {
 cerrarSession():void{
   this._token = null;
   this._usuario = null;
-  sessionStorage.clear();
+  localStorage.clear();
 }
 hasRole(role:string):boolean{
   if (this.usuario.roles.includes(role)){
